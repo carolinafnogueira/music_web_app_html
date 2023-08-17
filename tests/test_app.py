@@ -1,6 +1,20 @@
 from playwright.sync_api import Page, expect
 
 # Tests for your routes go here
+'''
+We can get formatted albums wit release year
+from the /albums page
+'''
+def test_get_albums(page, test_web_address, db_connection):
+    db_connection.seed('seeds/record_store.sql')
+    page.goto(f'http://{test_web_address}/albums')
+    p_tag = page.locator('p')
+    expect(p_tag).to_have_text([
+        'Title: Doolittle \nReleased: 1989',
+        'Title: Suffer Rosa \nReleased: 1988'
+    ])
+
+    
 
 # === Example Code Below ===
 

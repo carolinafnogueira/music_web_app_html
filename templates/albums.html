@@ -1,0 +1,38 @@
+<!-- GET /albums -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Albums</title>
+    <style type='text/css'>
+        body{
+            background: #FF0000; 
+        }
+        div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+        }
+        div:hover{
+            transition: all 600ms ease-in;
+            box-shadow: 0 1 6px #000;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>Albums</h1>
+
+    <div>
+      {% for album in albums %}
+      <p>
+        Title: {{album.title}}
+        Released: {{album.release_year}}
+      </p>
+      {% endfor %}
+    </div>
+
+
+
+    <!-- ... -->
+  </body>
+</html>
