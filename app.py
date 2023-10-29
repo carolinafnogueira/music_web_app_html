@@ -28,13 +28,22 @@ def get_albums():
     connection = get_flask_database_connection(app)
     repository = AlbumRepository(connection)
     albums = repository.all()
-    return render_template('albums.html', albums=albums)
+    return render_template('albums/index.html', albums=albums)
+
+@app.route('/albums/<int:id>', methods=['GET'])
+def get_album(id):
+    connection = get_flask_database_connection(app)
+    album_repo = AlbumRepository(connection)
+    album = album_repo.find(id)
+    artist = album_repo.get_artist_name(id)
+    return render_template('albums/show.html', album=album, artist=artist)
 
 @app.route('/artists', methods=['GET'])
 def get_artists():
     connection = get_flask_database_connection(app)
     repository = ArtistRepository(connection)
-    return ', '.join(repository.all())
+    artists = repository.all()
+    return render_template('artists/index.html', artists=artists)
 
 @app.route('/artists', methods=['POST'])
 def create_artist():
@@ -47,6 +56,8 @@ def create_artist():
     )
     repository.create(artist)
     return ''
+
+
 
 # == Example Code Below ==
 
